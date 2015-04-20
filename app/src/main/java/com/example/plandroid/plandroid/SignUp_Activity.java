@@ -20,6 +20,7 @@ import org.json.JSONArray;
 public class SignUp_Activity extends ActionBarActivity implements OnClickListener{
     String username;
     User newUser = new User(); //this is a new user that will input his or her info
+    boolean success = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +57,15 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
             //AsyncTask to sign up the user
             new SignUpUser().execute("4", newUser.getFirstname(), newUser.getLastname(), newUser.getPassword());
 
-
             //pass in username to Options_Activity
             bundle.putString("USERNAME", newUser.getUsername());
-
-            myIntent = new Intent(SignUp_Activity.this, Options_Activity.class);
-            myIntent.putExtras(bundle);
-            startActivityForResult(myIntent, 0);
+            if(success) { //true
+                myIntent = new Intent(SignUp_Activity.this, Options_Activity.class);
+                myIntent.putExtras(bundle);
+                startActivityForResult(myIntent, 0);
+            }else if(!success){
+                return;
+            }
             //startActivity(myIntent);
         }
     }
@@ -101,8 +104,10 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
         protected void onPostExecute(JSONArray jsonArray){
             if(temp != null) {
                 Toast.makeText(SignUp_Activity.this, "User Created", Toast.LENGTH_SHORT).show();
+                success = true;
             }else{
-                Toast.makeText(SignUp_Activity.this, "User Created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUp_Activity.this, "User Creation Failed", Toast.LENGTH_SHORT).show();
+                success = false;
             }
         }
     }
