@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- contains colors that will be used throughout activities -->
+    <color name = "loginbt">#56dbee</color>
+    <color name = "loginbg">#ff44c4d1</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+</resources>

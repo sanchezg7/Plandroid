@@ -1,0 +1,138 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/background_gradient"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft = "20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical" >
+
+            <!-- Event Name Box -->
+            <EditText
+                android:id="@+id/in_eventname"
+                android:hint = "@string/event_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:digits=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:inputType="textPersonName"
+                android:singleLine="true" >
+
+                <requestFocus />
+            </EditText>
+
+            <!--Event Description Box -->
+            <EditText
+                android:id="@+id/in_event_des"
+                android:hint="@string/event_des"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:inputType="text"/>
+
+            <!-- Event Location Box -->
+            <EditText
+                android:id="@+id/in_event_location"
+                android:hint="@string/event_location"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="text" />
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/in_event_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:layout_weight="1"
+                    android:hint = "@string/Set_ED"
+                    />
+
+                <EditText
+                    android:id="@+id/in_event_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:layout_weight="1"
+                    android:hint = "@string/Set_ET"
+                    />
+            </LinearLayout>
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+
+            <!--use pickers to set the date-->
+            <!--Event Time Selection -->
+            <TimePicker
+                android:id="@+id/timePicker1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/set_button"
+                android:layout_marginBottom="10dp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Privacy Textview -->
+                <TextView
+                    android:id="@+id/privacy_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_privacy"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!-- Select Privacy -->
+                <Spinner
+                    android:id="@+id/privacy_spinner"
+                    android:layout_gravity="left"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonCE"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/create_event" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

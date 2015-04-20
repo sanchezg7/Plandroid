@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Plandroid</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="firstnameIn">Firstname</string>
+    <string name="lastnameIn">Lastname</string>
+    <string name="label_UserName">Username</string>
+    <string name="label_password">Password</string>
+    <string name="label_rePassword">Re-enter Password</string>
+    <string name="label_PhoneNum">Phone Number</string>
+    <string name="label_email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_event">Create Event</string>
+    <string name="search_event">Search Event</string>
+    <string name="delete_event">Delete Event</string>
+
+    <string name="event_name">Event Name</string>
+    <string name="event_date">Event Date</string>
+    <string name="event_des">Description</string>
+    <string name="event_location">Location</string>
+    <string name="event_privacy">Privacy</string>
+    <string name="Set_ED">Set Event Date</string>
+    <string name="Set_ET">Set Event Time</string>
+    <string-array name="privacy_array">
+        <item>Select One</item>
+        <item>Private</item>
+        <item>Open</item>
+    </string-array>
+
+    <string name="SendQuery">Send Test Query</string>
+    <string name="getAllUsers">Get All Registered Users</string>
+
+    <string name="title_activity_create_event">Create Event</string>
+    <string name="title_activity_delete_event">Delete Event</string>
+    <string name="title_activity_search_event">Search Events</string>
+    <string name="title_activity_sign_up_">Sign Up</string>
+    <string name="title_activity_options_">Options</string>
+    <string name="title_activity_test_query">TestQuery</string>
+</resources>
