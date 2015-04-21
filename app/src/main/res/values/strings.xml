@@ -18,6 +18,8 @@
 
     <string name="event_name">Event Name</string>
     <string name="event_date">Event Date</string>
+    <string name="event_hour">Event Hour</string>
+    <string name="event_minute">Event Minute</string>
     <string name="event_des">Description</string>
     <string name="event_location">Location</string>
     <string name="event_privacy">Privacy</string>

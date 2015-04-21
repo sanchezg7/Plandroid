@@ -29,10 +29,19 @@
                 android:text="@string/label_UserName"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
+            <EditText
+                android:id="@+id/del_in_eventname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:hint="@string/event_name"
+                android:layout_marginBottom="5dp"/>
+
 
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="562dp"
+                android:layout_height="54dp"
                 android:id="@+id/deleteEventListView"/>
 
         </LinearLayout>

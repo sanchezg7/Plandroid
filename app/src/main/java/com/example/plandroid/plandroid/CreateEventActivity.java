@@ -4,19 +4,41 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
+import android.widget.TimePicker;
+import android.widget.DatePicker;
+import android.widget.Toast;
+
 
 public class CreateEventActivity extends ActionBarActivity {
 
+    TimePicker timePicker;
+    DatePicker datePicker;
 
+    //event date
+    int event_month;
+    int event_day;
+    int event_year;
+
+    //event times
+    int event_hr;
+    int event_min;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+        //timepicker reference
+        timePicker = (TimePicker) findViewById(R.id.timePicker1);
+        timePicker.setIs24HourView(true);
+
+        //datepicker reference
+        datePicker = (DatePicker) findViewById(R.id.datePicker);
 
         Spinner spinner = (Spinner) findViewById(R.id.privacy_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -28,6 +50,24 @@ public class CreateEventActivity extends ActionBarActivity {
         spinner.setAdapter(adapter);
         EditText eDate = (EditText) findViewById(R.id.in_event_date);
         EditText eTime = (EditText) findViewById(R.id.in_event_time);
+
+
+    }
+
+
+    public void onClick(View v) {
+        Toast.makeText(getBaseContext(), "Date selected:" + (datePicker.getMonth() + 1) + "/" + datePicker.getDayOfMonth() + "/" + datePicker.getYear() + "\n"
+                + "Time selected:" + timePicker.getCurrentHour() + ":" + timePicker.getCurrentMinute(), Toast.LENGTH_SHORT).show();
+
+        //gets the date
+        event_month = datePicker.getMonth() + 1;
+        event_day = datePicker.getDayOfMonth();
+        event_year = datePicker.getYear();
+
+        //gets the time
+        event_hr = timePicker.getCurrentHour();
+        event_min = timePicker.getCurrentMinute();
+
     }
 
 

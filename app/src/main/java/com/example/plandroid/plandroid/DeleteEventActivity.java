@@ -20,11 +20,14 @@ public class DeleteEventActivity extends ActionBarActivity implements View.OnCli
     String deleteEvent_username;
     String deleteEvent_ename;
     private ListView deleteEventListView;
+    EditText del_eventNameField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_event);
+
+        del_eventNameField = (EditText) findViewById(R.id.del_in_eventname);
 
         // Obtain values passed through Intents
         Bundle b = getIntent().getExtras();
