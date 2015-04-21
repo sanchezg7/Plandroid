@@ -86,6 +86,27 @@ public class dbConnect {
         return dbRetrieve(url);
     }
 
+    public JSONArray createUser(String ... params){
+        String username;
+        String password;
+        String firstname;
+        String lastname;
+        String d_ID;
+
+        if(params.length >= 5) {
+            username = params[1];
+            password = params[2];
+            firstname = params[3];
+            lastname = params[4];
+            d_ID = params[5];
+        }else{
+            return null;
+        }
+        String url = "http://65.35.235.139:81/?username=" + username + "&password=" + password + "&lastname=" + lastname + "&firstname=" + firstname + "&d_ID=" + d_ID;
+
+        return dbRetrieve(url);
+    }
+
     public JSONArray selector (String... instruction){
 
         //Log.e("Instruction[0]: ", instruction[0]);
@@ -100,6 +121,8 @@ public class dbConnect {
             case"2":
                 //Log.e("case 2, getEvents", "size of parameter: " + instruction.length);
                 return getEvents(instruction);
+            case"3":
+                Log.e("case 3, sign up user: ", "size of parameter: " + instruction.length);
             default:
                 Log.e("Default case", "Shouldn't be here");
                 return null;

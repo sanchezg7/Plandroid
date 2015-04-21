@@ -24,9 +24,13 @@
     <string name="Set_ED">Set Event Date</string>
     <string name="Set_ET">Set Event Time</string>
     <string-array name="privacy_array">
-        <item>Select One</item>
         <item>Private</item>
         <item>Open</item>
+    </string-array>
+    <string-array name="department_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string name="SendQuery">Send Test Query</string>
@@ -38,4 +42,5 @@
     <string name="title_activity_sign_up_">Sign Up</string>
     <string name="title_activity_options_">Options</string>
     <string name="title_activity_test_query">TestQuery</string>
+    <string name="dID">Department ID</string>
 </resources>

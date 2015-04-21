@@ -3,7 +3,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/background_gradient"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="top"
     android:padding="10dp">
 
     <TextView
@@ -23,10 +23,20 @@
         android:paddingRight="20dp" >
 
         <EditText
+            android:id="@+id/in_username"
+            android:hint="@string/label_UserName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:inputType="text"/>
+
+        <EditText
             android:id="@+id/in_firstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="5dp"
             android:background="@color/white"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:hint="@string/firstnameIn"
@@ -50,16 +60,6 @@
 
 
         <EditText
-            android:id="@+id/in_username"
-            android:hint="@string/label_UserName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:inputType="text"/>
-
-        <EditText
             android:id="@+id/in_password"
             android:hint="@string/label_password"
             android:layout_width="fill_parent"
@@ -68,6 +68,7 @@
             android:background="@color/white"
             android:padding="10dp"
             android:inputType="textPassword" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,12 +78,12 @@
                 android:id="@+id/privacy_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/event_privacy"
+                android:text="@string/dID"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginTop="5dp" />
             <!-- Select Privacy -->
             <Spinner
-                android:id="@+id/privacy_spinner"
+                android:id="@+id/department_spinner"
                 android:layout_gravity="left"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />

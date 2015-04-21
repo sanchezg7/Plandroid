@@ -5,7 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.view.View;
@@ -20,7 +22,10 @@ import org.json.JSONArray;
 public class SignUp_Activity extends ActionBarActivity implements OnClickListener{
     String username;
     User newUser = new User(); //this is a new user that will input his or her info
-    boolean success = false;
+    boolean success = false; //check to see if query is successful
+    Spinner spinner; //to select the d_ID number
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,16 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
         //A.O. not sure about the line of code below
         //username = usernameTextView.toString(); //this will be added to the database using JDBC
         sign_up.setOnClickListener(this);
+
+        Spinner spinner = (Spinner) findViewById(R.id.department_spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.department_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
 
     }
 
@@ -52,10 +67,12 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
             newUser.setFirstname(firstname_ET.getText().toString());
             newUser.setLastname(lastname_ET.getText().toString());
             newUser.setUsername(username_ET.getText().toString());
-            newUser.setPassword(password_ET.getText().toString()); //A.O. ensure 2 passwords are the same
+            newUser.setPassword(password_ET.getText().toString());
+            String d_ID = spinner.getSelectedItem().toString();
+
 
             //AsyncTask to sign up the user
-            new SignUpUser().execute("4", newUser.getFirstname(), newUser.getLastname(), newUser.getPassword());
+            new SignUpUser().execute("4", newUser.getUsername(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), d_ID);
 
             //pass in username to Options_Activity
             bundle.putString("USERNAME", newUser.getUsername());
@@ -96,9 +113,11 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
 
         JSONArray temp = null;
         dbConnect handle = new dbConnect();
+
         @Override
         protected JSONArray doInBackground(String ... params){
-            return handle.selector(params[0]);
+            temp = handle.selector(params);
+            return temp;
         }
 
         protected void onPostExecute(JSONArray jsonArray){
