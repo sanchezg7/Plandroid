@@ -50,7 +50,11 @@ public class Options_Activity extends ActionBarActivity {
                 }
                 else if(arg0.getId() == R.id.button3){ //go to DeleteEventActivity when sign_up button pressed
                     Intent myIntent = new Intent(arg0.getContext(), DeleteEventActivity.class);
-                    startActivity(myIntent);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("DELETE_EVENT_USERNAME", options_username);
+                    myIntent.putExtras(bundle);
+                    startActivityForResult(myIntent, 0);
                 }
             }
         };
