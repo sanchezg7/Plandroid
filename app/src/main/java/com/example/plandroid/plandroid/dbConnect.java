@@ -102,7 +102,7 @@ public class dbConnect {
         }else{
             return null;
         }
-        String url = "http://65.35.235.139:81/?username=" + username + "&password=" + password + "&lastname=" + lastname + "&firstname=" + firstname + "&d_ID=" + d_ID;
+        String url = "http://65.35.235.139:81/createUser.php?username=" + username + "&password=" + password + "&lastname=" + lastname + "&firstname=" + firstname + "&d_ID=" + d_ID;
 
         return dbRetrieve(url);
     }
@@ -123,6 +123,7 @@ public class dbConnect {
                 return getEvents(instruction);
             case"3":
                 Log.e("case 3, sign up user: ", "size of parameter: " + instruction.length);
+                return createUser(instruction);
             default:
                 Log.e("Default case", "Shouldn't be here");
                 return null;

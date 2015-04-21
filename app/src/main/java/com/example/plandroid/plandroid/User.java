@@ -21,7 +21,7 @@ public class User {
     public String getPassword() { return password;}
     public String getFirstname(){ return firstname; }
     public String getLastname(){ return lastname; }
-    public String getPhonenumber() { return phonenumber; }
+    public String getDeparment() { return deparment; }
 
     //set functions
     public void setUsername(String n) {
@@ -34,12 +34,12 @@ public class User {
     public void setLastname(String n) {
         lastname = n;
     }
-    public void setPhonenumber(String n) {phonenumber = n;}
+    public void setDepartment(String n) {deparment = n;}
 
     //private String u_id;
     private String username;
     private String password;
     private String firstname;
     private String lastname;
-    private String phonenumber;
+    private String deparment;
 }

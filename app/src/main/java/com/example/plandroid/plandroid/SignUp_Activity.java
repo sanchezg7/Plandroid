@@ -3,8 +3,10 @@ package com.example.plandroid.plandroid;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -19,11 +21,11 @@ import android.os.Bundle;
 import org.json.JSONArray;
 
 
-public class SignUp_Activity extends ActionBarActivity implements OnClickListener{
+public class SignUp_Activity extends ActionBarActivity implements OnClickListener, AdapterView.OnItemSelectedListener {
     String username;
     User newUser = new User(); //this is a new user that will input his or her info
     boolean success = false; //check to see if query is successful
-    Spinner spinner; //to select the d_ID number
+    //Spinner spinner; //to select the d_ID number
 
 
     @Override
@@ -38,7 +40,7 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
         //A.O. not sure about the line of code below
         //username = usernameTextView.toString(); //this will be added to the database using JDBC
         sign_up.setOnClickListener(this);
-
+        /*
         Spinner spinner = (Spinner) findViewById(R.id.department_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -47,6 +49,8 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+        */
 
 
     }
@@ -62,17 +66,24 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
             EditText lastname_ET = (EditText) findViewById(R.id.in_lastname);
             EditText username_ET = (EditText) findViewById(R.id.in_username);
             EditText password_ET = (EditText) findViewById(R.id.in_password);
+            EditText dept_ET = (EditText) findViewById(R.id.in_department);
 
             //calling set functions on the new user object
             newUser.setFirstname(firstname_ET.getText().toString());
             newUser.setLastname(lastname_ET.getText().toString());
             newUser.setUsername(username_ET.getText().toString());
             newUser.setPassword(password_ET.getText().toString());
-            String d_ID = spinner.getSelectedItem().toString();
+            newUser.setDepartment(dept_ET.getText().toString());
+
+            //String d_ID = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
+            //int position = spinner.getSelectedItemPosition();
+
+            //Log.e("spinner position: ", String.valueOf(position));
+
 
 
             //AsyncTask to sign up the user
-            new SignUpUser().execute("4", newUser.getUsername(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), d_ID);
+            new SignUpUser().execute("3", newUser.getUsername(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), newUser.getDeparment());
 
             //pass in username to Options_Activity
             bundle.putString("USERNAME", newUser.getUsername());
@@ -83,9 +94,23 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
             }else if(!success){
                 return;
             }
-            //startActivity(myIntent);
+
+
         }
     }
+
+    //listener modules for spinner
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

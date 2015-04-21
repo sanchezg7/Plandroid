@@ -69,25 +69,38 @@
             android:padding="10dp"
             android:inputType="textPassword" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/in_department"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <!-- Privacy Textview -->
-            <TextView
-                android:id="@+id/privacy_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dID"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_marginTop="5dp" />
-            <!-- Select Privacy -->
-            <Spinner
-                android:id="@+id/department_spinner"
-                android:layout_gravity="left"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            android:hint="@string/dID"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:inputType="textPersonName"
+            android:padding="10dp"/>
+        <!--
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    Privacy Textview -->
+        <!--
+                    <TextView
+                        android:id="@+id/privacy_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dID"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginTop="5dp" />
+                    Select Privacy -->
+        <!--
+                    <Spinner
+                        android:id="@+id/department_spinner"
+                        android:layout_gravity="left"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                -->
 
 
     </LinearLayout>

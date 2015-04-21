@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Adeoluwa\Desktop\Plandroid\Plandroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="C:\Users\Adeoluwa\Desktop\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\classes-c1cbf04813fee093dad68ef7b1eaf2c862174f20.jar" />
-    </item>
-    <item
-        jar="C:\Users\Adeoluwa\Desktop\Plandroid\Plandroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jar="C:\Users\GerardoSLnv\Documents\Database Final Project\Plandroid\Plandroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="C:\Users\Adeoluwa\Desktop\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\classes-03aa889b6d318c3ac35eab118a074efdbb821fe2.jar" />
+        <dex dex="C:\Users\GerardoSLnv\Documents\Database Final Project\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\classes-c444f9e9ecda65959ef316cea4daa563cba48a3f.jar" />
     </item>
     <item
-        jar="C:\Users\Adeoluwa\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="C:\Users\Adeoluwa\Desktop\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-836ecfbbb3ae2c36f0f4fc888eada8ab910f30dd.jar" />
-    </item>
-    <item
-        jar="C:\Users\Adeoluwa\Desktop\Plandroid\Plandroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jar="C:\Users\GerardoSLnv\Documents\Database Final Project\Plandroid\Plandroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="C:\Users\Adeoluwa\Desktop\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-ed7f144e1c1f2c1190945dedec1fd10e179f2d30.jar" />
+        <dex dex="C:\Users\GerardoSLnv\Documents\Database Final Project\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-1e111d1b589fa5f33d944df8980c9e9436e7b3f9.jar" />
+    </item>
+    <item
+        jar="C:\Users\GerardoSLnv\Documents\Database Final Project\Plandroid\Plandroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="C:\Users\GerardoSLnv\Documents\Database Final Project\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\classes-ad40a51689155cf70657b7bc47699c5ccd5a6ed9.jar" />
+    </item>
+    <item
+        jar="C:\Users\GerardoSLnv\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\GerardoSLnv\Documents\Database Final Project\Plandroid\Plandroid\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-d27f0b5ac38f9dff0951011fa8e84ee5ce1fcd67.jar" />
     </item>
 
 </items>
