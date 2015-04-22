@@ -28,10 +28,16 @@ public class CreateEventActivity extends ActionBarActivity {
     int event_hr;
     int event_min;
 
+    //event privacy
+    String privacy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+
+        EditText ePrivacy = (EditText) findViewById(R.id.in_privacy);
 
         //timepicker reference
         timePicker = (TimePicker) findViewById(R.id.timePicker1);
@@ -40,6 +46,7 @@ public class CreateEventActivity extends ActionBarActivity {
         //datepicker reference
         datePicker = (DatePicker) findViewById(R.id.datePicker);
 
+        /*
         Spinner spinner = (Spinner) findViewById(R.id.privacy_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -48,8 +55,9 @@ public class CreateEventActivity extends ActionBarActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        EditText eDate = (EditText) findViewById(R.id.in_event_date);
-        EditText eTime = (EditText) findViewById(R.id.in_event_time);
+        */
+
+
 
 
     }

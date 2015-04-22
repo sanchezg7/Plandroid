@@ -73,7 +73,7 @@ public class EventListViewAdapter extends BaseAdapter {
             JSONObject jsonObject = this.dataArray.getJSONObject(position);
             cell.eName.setText(jsonObject.getString("ename"));
             cell.eDate.setText(jsonObject.getString("date"));
-            cell.eDes.setText(jsonObject.getString("Description"));
+            cell.eDes.setText(jsonObject.getString("description"));
 
         } catch(JSONException e){
             e.printStackTrace();
