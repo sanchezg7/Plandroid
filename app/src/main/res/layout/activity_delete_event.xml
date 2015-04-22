@@ -7,20 +7,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/loginbg"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delete_event"
-                android:id="@+id/del_event_bt"
-                android:layout_gravity="center_horizontal" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete_event"
+                    android:id="@+id/del_event_bt"
+                    android:layout_gravity="center_horizontal" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/conditional_search"
+                    android:id="@+id/cond_search_bt" />
+
+             </LinearLayout>
+
 
             <TextView
                 android:id="@+id/del_usernameView"
@@ -29,6 +45,13 @@
                 android:textColor="@color/white"
                 android:text="@string/label_UserName"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:paddingTop="10dp"
+                android:text="@string/criteria"/>
 
             <EditText
                 android:id="@+id/del_in_eventname"
@@ -39,10 +62,39 @@
                 android:hint="@string/event_name"
                 android:layout_marginBottom="5dp"/>
 
+            <!-- Location -->
+            <EditText
+                android:id="@+id/del_in_eventloc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:hint="@string/event_location"
+                android:layout_marginBottom="5dp"/>
+
+            <!-- Privacy -->
+            <EditText
+                android:id="@+id/del_in_eventprv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:hint="@string/event_privacy"
+                android:layout_marginBottom="5dp"/>
+
+            <EditText
+                android:id="@+id/del_in_eventOUsr"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:hint="@string/other_user"
+                android:layout_marginBottom="5dp"/>
+
 
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="300dp"
                 android:id="@+id/deleteEventListView"/>
 
         </LinearLayout>

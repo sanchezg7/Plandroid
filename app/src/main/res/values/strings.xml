@@ -45,4 +45,7 @@
     <string name="title_activity_options_">Options</string>
     <string name="title_activity_test_query">TestQuery</string>
     <string name="dID">Department ID</string>
+    <string name="conditional_search">Conditional Search</string>
+    <string name="criteria">Search Criteria</string>
+    <string name="other_user">Other User</string>
 </resources>
