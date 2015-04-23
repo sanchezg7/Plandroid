@@ -31,13 +31,18 @@ public class Options_Activity extends ActionBarActivity {
         Button create_e = (Button) this.findViewById(R.id.button1);
         Button view_e = (Button) this.findViewById(R.id.button2);
         Button delete_e = (Button) this.findViewById(R.id.button3);
+        Button department_e = (Button) this.findViewById(R.id.button4);
 
         //creating onClick Listener
         OnClickListener theClickEvent = new OnClickListener(){
             public void onClick(View arg0){
                 if(arg0.getId() == R.id.button1){ //go to CreateEventActivity log_in button pressed
                     Intent myIntent = new Intent(arg0.getContext(), CreateEventActivity.class);
-                    startActivity(myIntent);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("CREATE_EVENT_USERNAME", options_username);
+                    myIntent.putExtras(bundle);
+                    startActivityForResult(myIntent, 0);
                 }
                 else if(arg0.getId() == R.id.button2){ //go to SearchEventActivity when sign_up button pressed
                     Intent myIntent = new Intent(arg0.getContext(), SearchEventActivity.class);
@@ -56,11 +61,20 @@ public class Options_Activity extends ActionBarActivity {
                     myIntent.putExtras(bundle);
                     startActivityForResult(myIntent, 0);
                 }
+                else if(arg0.getId() == R.id.button4){ //go to DeleteEventActivity when sign_up button pressed
+                    Intent myIntent = new Intent(arg0.getContext(), DepartmentActivity.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("DEPARTMENT_EVENT_USERNAME", options_username);
+                    myIntent.putExtras(bundle);
+                    startActivityForResult(myIntent, 0);
+                }
             }
         };
         create_e.setOnClickListener(theClickEvent);
         view_e.setOnClickListener(theClickEvent);
         delete_e.setOnClickListener(theClickEvent);
+        department_e.setOnClickListener(theClickEvent);
     }
 
 

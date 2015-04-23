@@ -25,6 +25,8 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
     String username;
     User newUser = new User(); //this is a new user that will input his or her info
     boolean success = false; //check to see if query is successful
+    Intent myIntent;
+    Bundle bundle = new Bundle();
     //Spinner spinner; //to select the d_ID number
 
 
@@ -57,8 +59,7 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
 
     @Override
     public void onClick(View v){
-        Intent myIntent;
-        Bundle bundle = new Bundle();
+
         if(v.getId() == R.id.signUpB){
 
             //Text References. Gets data from user
@@ -77,28 +78,27 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
 
             //String d_ID = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
             //int position = spinner.getSelectedItemPosition();
-
             //Log.e("spinner position: ", String.valueOf(position));
-
-
 
             //AsyncTask to sign up the user
             new SignUpUser().execute("3", newUser.getUsername(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), newUser.getDeparment());
 
-            //pass in username to Options_Activity
-            bundle.putString("USERNAME", newUser.getUsername());
-            if(success) { //true
-                myIntent = new Intent(SignUp_Activity.this, Options_Activity.class);
-                myIntent.putExtras(bundle);
-                startActivityForResult(myIntent, 0);
-            }else if(!success){
-                return;
-            }
-
-
         }
     }
 
+    public void onSuccess(boolean success){
+        //pass in username to Options_Activity
+        bundle.putString("USERNAME", newUser.getUsername());
+        if(success) { //true
+            //Log.e("success: " , Boolean.toString(success));
+            myIntent = new Intent(SignUp_Activity.this, Options_Activity.class);
+            myIntent.putExtras(bundle);
+            startActivityForResult(myIntent, 0);
+        }else if(!success){
+            //Log.e("success: " , Boolean.toString(success));
+            return;
+        }
+    }
     //listener modules for spinner
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
@@ -142,17 +142,22 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
         @Override
         protected JSONArray doInBackground(String ... params){
             temp = handle.selector(params);
+
             return temp;
         }
 
         protected void onPostExecute(JSONArray jsonArray){
             if(temp != null) {
                 Toast.makeText(SignUp_Activity.this, "User Created", Toast.LENGTH_SHORT).show();
-                success = true;
+                onSuccess(true);
+                return;
             }else{
                 Toast.makeText(SignUp_Activity.this, "User Creation Failed", Toast.LENGTH_SHORT).show();
-                success = false;
+                onSuccess(false);
+                return;
             }
+
+
         }
     }
 }

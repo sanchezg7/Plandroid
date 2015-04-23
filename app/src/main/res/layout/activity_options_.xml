@@ -36,6 +36,17 @@
         android:layout_weight="0.05"
         android:text="@string/delete_event" />
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="50dp"
+        android:background="@color/loginbt"
+        android:textColor="@color/white"
+        android:layout_weight="0.05"
+        android:text="Department" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

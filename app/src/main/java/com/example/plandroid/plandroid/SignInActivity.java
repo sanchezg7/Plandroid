@@ -2,6 +2,7 @@ package com.example.plandroid.plandroid;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -25,6 +26,9 @@ import android.os.AsyncTask;
 
 public class SignInActivity extends ActionBarActivity implements OnClickListener{
 
+    Intent myIntent;
+    Bundle bundle = new Bundle();
+    boolean success = false; //check to see if query is successful
     public String username = "";
     public String password = "";
 
@@ -53,12 +57,12 @@ public class SignInActivity extends ActionBarActivity implements OnClickListener
     //when a button is pressed on this screen
     @Override
     public void onClick(View v){
-        Intent myIntent;
+
         switch (v.getId()){
 
             //btnQuery goes to another activity screen
             case R.id.btnQuery:
-                Toast.makeText(SignInActivity.this, "btnQuery Button Pressed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SignInActivity.this, "btnQuery Button Pressed", Toast.LENGTH_SHORT).show();
                 myIntent = new Intent(SignInActivity.this, TestQuery.class);
                 startActivity(myIntent);
                 break;
@@ -66,7 +70,7 @@ public class SignInActivity extends ActionBarActivity implements OnClickListener
             //this button will save the text fields and pass them into the database to make sure the result is one row
             //to indicate valid and successful login otherwise deny entry
             case R.id.buttonLgn:
-                Bundle bundle = new Bundle();
+
                 //Text References. Gets the texts the user enters
                 EditText username_ET = (EditText)findViewById(R.id.in_username);
                 EditText password_ET = (EditText)findViewById(R.id.in_password);
@@ -77,14 +81,16 @@ public class SignInActivity extends ActionBarActivity implements OnClickListener
                 password = password_ET.getText().toString(); //Shouldn't this go where the login button is pressed? YOU RIGHT
 
                 bundle.putString("USERNAME", username);
-                myIntent = new Intent(SignInActivity.this, Options_Activity.class);
-                myIntent.putExtras(bundle);
-                startActivityForResult(myIntent, 0);
-                //startActivity(myIntent);
+
+                //AsyncTask to sign up the user
+                new authenticate().execute("6", username, password);
                 break;
+
+
             //this button will redirect to another activity that will provide fields for the user to sign up
             case R.id.buttonSU:
-                Toast.makeText(SignInActivity.this, "Sign Up Button Pressed", Toast.LENGTH_SHORT).show();
+                //Log.e("In buttonSU, success: ", Boolean.toString(success));
+                //Toast.makeText(SignInActivity.this, "Sign Up Button Pressed", Toast.LENGTH_SHORT).show();
                 myIntent = new Intent(SignInActivity.this, SignUp_Activity.class);
                 startActivity(myIntent);
                 break;
@@ -114,33 +120,46 @@ public class SignInActivity extends ActionBarActivity implements OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
-    public void setTextToTextView(JSONArray jsonArray){
-        String s = "";
-        for(int i=0; i<jsonArray.length(); ++i){
-            JSONObject json = null;
-            try{
-                json = jsonArray.getJSONObject(i);
-                s = s +
-                        "Id: " +json.getString("id")+" \n"+
-                        "Name: " + json.getString("name");
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
+    private void onSuccess(boolean success){
+        if(success) { //true
+            //Log.e("Succesful", "going to Options_Activity");
+            myIntent = new Intent(SignInActivity.this, Options_Activity.class);
+            myIntent.putExtras(bundle);
+            startActivityForResult(myIntent, 0);
+        }else if(!success){
+            //Log.e("Failed", "do nothing");
+            return;
         }
+
     }
 
 
 
-    private class GetUsers extends AsyncTask<dbConnect, Long, JSONArray> {
+
+
+    public class authenticate extends AsyncTask<String, Long, JSONArray>{
+
+        JSONArray temp = null;
+        dbConnect handle = new dbConnect();
 
         @Override
-        protected JSONArray doInBackground(dbConnect... params){
-            return params[0].getAllUsers();
+        protected JSONArray doInBackground(String ... params){
+            temp = handle.selector(params);
+            return temp;
         }
 
-        @Override
         protected void onPostExecute(JSONArray jsonArray){
-            setTextToTextView(jsonArray);
+            if(temp != null) {
+                //Log.e("JSONArray", "not null");
+                Toast.makeText(SignInActivity.this, "Log In Successful", Toast.LENGTH_SHORT).show();
+                onSuccess(true);
+                return;
+            }else{
+                //Log.e("JSONArray", "NULL");
+                Toast.makeText(SignInActivity.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
+                onSuccess(false);
+                return;
+            }
         }
     }
 }

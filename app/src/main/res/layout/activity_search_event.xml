@@ -39,6 +39,13 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginTop="2dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:paddingTop="10dp"
+                android:text="@string/criteria"/>
+
             <EditText
                 android:id="@+id/in_eventname"
                 android:layout_width="fill_parent"
@@ -46,6 +53,35 @@
                 android:padding="10dp"
                 android:background="@color/white"
                 android:hint="@string/event_name"
+                android:layout_marginBottom="5dp"/>
+
+            <!-- Location -->
+            <EditText
+                android:id="@+id/ser_in_eventloc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:hint="@string/event_location"
+                android:layout_marginBottom="5dp"/>
+
+            <!-- Privacy -->
+            <EditText
+                android:id="@+id/ser_in_eventprv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:hint="@string/event_privacy"
+                android:layout_marginBottom="5dp"/>
+
+            <EditText
+                android:id="@+id/ser_in_eventOUsr"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:hint="@string/other_user"
                 android:layout_marginBottom="5dp"/>
 
         </LinearLayout>

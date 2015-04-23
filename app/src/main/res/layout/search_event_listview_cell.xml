@@ -31,6 +31,19 @@
             android:text="@string/event_des"
             android:textColor="@color/black"
             android:id = "@+id/view_event_des"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/event_location"
+            android:textColor="@color/black"
+            android:id = "@+id/view_event_loc"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/event_privacy"
+            android:textColor="@color/black"
+            android:id = "@+id/view_event_pri"/>
     </LinearLayout>
+
 
 </LinearLayout>

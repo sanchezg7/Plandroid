@@ -60,6 +60,9 @@ public class EventListViewAdapter extends BaseAdapter {
             cell.eName = (TextView) convertView.findViewById(R.id.view_event_name);
             cell.eDate = (TextView) convertView.findViewById(R.id.view_event_date);
             cell.eDes = (TextView) convertView.findViewById(R.id.view_event_des);
+            cell.eLoc = (TextView) convertView.findViewById(R.id.view_event_loc);
+            cell.ePri = (TextView) convertView.findViewById(R.id.view_event_pri);
+
 
             //set the tag to allow for reuse of this cell
             convertView.setTag(cell);
@@ -74,6 +77,8 @@ public class EventListViewAdapter extends BaseAdapter {
             cell.eName.setText(jsonObject.getString("ename"));
             cell.eDate.setText(jsonObject.getString("date"));
             cell.eDes.setText(jsonObject.getString("description"));
+            cell.eLoc.setText(jsonObject.getString("location"));
+            cell.ePri.setText(jsonObject.getString("privacy"));
 
         } catch(JSONException e){
             e.printStackTrace();
@@ -88,6 +93,8 @@ public class EventListViewAdapter extends BaseAdapter {
         private TextView eName;
         private TextView eDate;
         private TextView eDes;
+        private TextView eLoc;
+        private TextView ePri;
 
     }
 }

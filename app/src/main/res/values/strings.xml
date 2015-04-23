@@ -48,4 +48,5 @@
     <string name="conditional_search">Conditional Search</string>
     <string name="criteria">Search Criteria</string>
     <string name="other_user">Other User</string>
+    <string name="title_activity_department">Department</string>
 </resources>

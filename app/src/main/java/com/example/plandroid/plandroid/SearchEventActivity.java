@@ -23,6 +23,9 @@ public class SearchEventActivity extends ActionBarActivity implements View.OnCli
     String searchEvent_ename;
     private ListView searchEventListView;
     EditText eventNameField;
+    EditText ser_eLocation;
+    EditText ser_ePrivacy;
+    EditText ser_oUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,12 @@ public class SearchEventActivity extends ActionBarActivity implements View.OnCli
         one_textView.setText(searchEvent_username);
         //Button
         Button eventQBtn = (Button) findViewById(R.id.eventQBtn);
+
+        //EditText
+        eventNameField = (EditText) findViewById(R.id.in_eventname);
+        ser_eLocation = (EditText) findViewById(R.id.ser_in_eventloc);
+        ser_ePrivacy = (EditText) findViewById(R.id.ser_in_eventprv);
+        ser_oUser = (EditText) findViewById(R.id.ser_in_eventOUsr);
 
         //create Listview to hold the results
         this.searchEventListView = (ListView) this.findViewById(R.id.searchEventListView);
@@ -86,7 +95,7 @@ public class SearchEventActivity extends ActionBarActivity implements View.OnCli
                 Toast.makeText(SearchEventActivity.this, "eventQBtn pressed", Toast.LENGTH_SHORT).show();
                 searchEvent_ename = null;
                 searchEvent_ename = eventNameField.getText().toString();
-                new GetEvents().execute("2", searchEvent_username, searchEvent_ename);
+                new GetEvents().execute("2", searchEvent_username, searchEvent_ename, ser_eLocation.getText().toString(),ser_ePrivacy.getText().toString(), ser_oUser.getText().toString());
                 break;
         }
     }
