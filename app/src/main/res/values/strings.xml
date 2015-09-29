@@ -49,4 +49,13 @@
     <string name="other_user">Other User</string>
     <string name="title_activity_department">Department</string>
     <string name="initial_results">Results List</string>
+
+    <!-- DB Command Strings -->
+    <string name="GET_USER_ALL">getAllUsers</string>
+    <string name="GET_EVENTS">getEvent</string>
+    <string name="CREATE_USER">createUser</string>
+    <string name="DELETE_EVENT">deleteEvent</string>
+    <string name="CREATE_EVENT">createEvent</string>
+    <string name="AUTHENTICATE">authenticate</string>
+    <string name="GET_DEPARTMENT">GET_DEPARTMENT</string>
 </resources>

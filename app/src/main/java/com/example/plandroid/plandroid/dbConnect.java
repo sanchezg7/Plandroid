@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 
 /**
@@ -20,31 +21,31 @@ import java.io.IOException;
  */
 public class dbConnect extends Application{
 
-    public static final String GET_USER_ALL="getAllUsers";
-    public static final String GET_EVENTS = "getEvent";
-    public static final String CREATE_USER = "createUser";
-    public static final String DELETE_EVENT = "deleteEvent";
-    public static final String CREATE_EVENT = "createEvent";
-    public static final String AUTHENTICATE = "authenticate";
-    public static final String GET_DEPARTMENT = "GET_DEPARTMENT";
-    public String ip_address = null;
+    private static final String GET_USER_ALL="getAllUsers";
+    private static final String GET_EVENTS = "getEvent";
+    private static final String CREATE_USER = "createUser";
+    private static final String DELETE_EVENT = "deleteEvent";
+    private static final String CREATE_EVENT = "createEvent";
+    private static final String AUTHENTICATE = "authenticate";
+    private static final String GET_DEPARTMENT = "GET_DEPARTMENT";
+    private String ip_address = null;
 
-    String username;
-    String eventname;
-    String eventdes;
-    String eventlocation;
-    String eventprivacy;
-    String date;
-    String time;
-    String other;
-    String password;
-    String firstname;
-    String lastname;
-    String department;
+    private String username;
+    private String eventname;
+    private String eventdes;
+    private String eventlocation;
+    private String eventprivacy;
+    private String date;
+    private String time;
+    private String other;
+    private String password;
+    private String firstname;
+    private String lastname;
+    private String department;
 
     public dbConnect(){
 
-        ip_address = getResources().getString(R.string.ip_address);
+        ip_address = "104.137.121.245:40000";
 
         username="";
         eventname="";
@@ -58,7 +59,11 @@ public class dbConnect extends Application{
         firstname="";
         lastname="";
         department="";
+        Log.e("constructor", "dbConnect");
+
+
     }
+
 
     public JSONArray selector (String... instruction){
 
@@ -94,7 +99,23 @@ public class dbConnect extends Application{
         //Get HttpEntity from HttpResponseObject
         HttpEntity httpEntity = null;
         try{
-            DefaultHttpClient httpClient = new DefaultHttpClient(); //Default HttpClient
+            HttpURLConnection httpURLConnection = new HttpURLConnection() {
+                @Override
+                public void disconnect() {
+
+                }
+
+                @Override
+                public boolean usingProxy() {
+                    return false;
+                }
+
+                @Override
+                public void connect() throws IOException {
+
+                }
+            };
+
             HttpGet httpGet = new HttpGet(url);
             HttpResponse httpResponse = httpClient.execute(httpGet);
             httpEntity = httpResponse.getEntity();
@@ -135,7 +156,7 @@ public class dbConnect extends Application{
     }
 
     public JSONArray getAllUsers(){
-        return dbRetrieve(baseUrlBuilder(new String[]{GET_USER_ALL}));
+        return dbRetrieve(baseUrlBuilder(GET_USER_ALL));
     }
 
 
