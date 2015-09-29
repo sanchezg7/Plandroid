@@ -1,7 +1,8 @@
 package com.example.plandroid.plandroid;
 
+import android.app.Application;
+import android.net.Uri;
 import android.util.Log;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -11,24 +12,87 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 /**
  * Created by GerardoSLnv on 4/14/2015.
  */
-public class dbConnect {
+public class dbConnect extends Application{
+
+    public static final String GET_USER_ALL="getAllUsers";
+    public static final String GET_EVENTS = "getEvent";
+    public static final String CREATE_USER = "createUser";
+    public static final String DELETE_EVENT = "deleteEvent";
+    public static final String CREATE_EVENT = "createEvent";
+    public static final String AUTHENTICATE = "authenticate";
+    public static final String GET_DEPARTMENT = "GET_DEPARTMENT";
+    public String ip_address = null;
+
+    String username;
+    String eventname;
+    String eventdes;
+    String eventlocation;
+    String eventprivacy;
+    String date;
+    String time;
+    String other;
+    String password;
+    String firstname;
+    String lastname;
+    String department;
+
+    public dbConnect(){
+
+        ip_address = getResources().getString(R.string.ip_address);
+
+        username="";
+        eventname="";
+        eventdes="";
+        eventlocation="";
+        eventprivacy="";
+        date="";
+        time="";
+        other="";
+        password="";
+        firstname="";
+        lastname="";
+        department="";
+    }
+
+    public JSONArray selector (String... instruction){
+
+        //Log.e("Instruction[0]: ", instruction[0]);
+        //Log.e("Instruction[1]: ", instruction[1]);
+        switch(instruction[0]){
+            case GET_USER_ALL:
+                //Log.e("In case 0", "calls getAllUsers()");
+                return getAllUsers();
+            case GET_EVENTS:
+                //Log.e("case 2, getEvents", "size of parameter: " + instruction.length);
+                return getEvents(instruction);
+            case CREATE_USER:
+                //Log.e("case 3, sign up user: ", "size of parameter: " + instruction.length);
+                return createUser(instruction);
+            case DELETE_EVENT:
+                return deleteEvent(instruction);
+            case CREATE_EVENT:
+                return createEvent(instruction);
+            case AUTHENTICATE:
+                return auth(instruction);
+            case GET_DEPARTMENT:
+                return getDepartment(instruction);
+            default:
+                Log.e("Default case", "Shouldn't be here");
+                return null;
+        }
+    }
 
     private JSONArray dbRetrieve(String url){
 
         //Get HttpResponseObject from the server
         //Get HttpEntity from HttpResponseObject
-
         HttpEntity httpEntity = null;
-
         try{
             DefaultHttpClient httpClient = new DefaultHttpClient(); //Default HttpClient
             HttpGet httpGet = new HttpGet(url);
@@ -42,9 +106,7 @@ public class dbConnect {
             e.printStackTrace();
 
         }
-
         JSONArray jsonArray = null;
-
         if(httpEntity != null){
             try{
                 String entityResponse = EntityUtils.toString(httpEntity);
@@ -59,217 +121,144 @@ public class dbConnect {
         return jsonArray;
     }
 
-    //function 1
-    public JSONArray getUsers(String name){
-        //URL for the server
-        String url = "http://65.35.235.139:81/getUser.php?name=" + name;
-        //Log.e("In getUsers, url: ", url);
+    public String baseUrlBuilder(String ... allParameters){
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("http")
+                .authority(ip_address)
+                .appendPath(allParameters[0]);
 
-        return dbRetrieve(url);
+        for(int index = 1; index < allParameters.length; index+=2){
+            builder.appendQueryParameter(allParameters[index], allParameters[index+1]);
+        }
+
+        return builder.build().toString();
     }
 
-    //function 0
     public JSONArray getAllUsers(){
-
-        //URL to execute on server
-        String url = "http://65.35.235.139:81/getAllUsers.php";
-        return dbRetrieve(url);
+        return dbRetrieve(baseUrlBuilder(new String[]{GET_USER_ALL}));
     }
 
-    //retrieve events for user name
-    //function 2
+
     public JSONArray getEvents(String ... params){
 
-       /* //params[1] is username and params[2] is ename
-        String username = params[1];
-        String ename = "";
-        if(params.length == 2 && params[2] != null){
-            ename = params[2];
-        }
-
-        String url = "http://65.35.235.139:81/getEvent.php?username=" + params[1] + "&ename=" + ename;
-        //Log.e("getEvents url ", url);
-        return dbRetrieve(url); */
-
-        String username="";
-        String eventname="";
-        String eventlocation="";
-        String eventprivacy="";
-        String other="";
-
-        if(params.length >= 3) {
-            try{
-                username = params[1];
-                eventname = URLEncoder.encode(params[2], "utf-8");
-                eventlocation = URLEncoder.encode(params[3], "utf-8");
-                eventprivacy = params[4];
-                other = params[5];
-            }catch ( UnsupportedEncodingException e){
-                e.printStackTrace();
-            }
-
-        }else{
+        if(params.length >=3) {
+            username = params[1];
+            eventname = params[2];
+            eventlocation = params[3];
+            eventprivacy = params[4];
+            other = params[5];
+        } else {
             return null;
         }
-        String url = "http://65.35.235.139:81/getEvent.php?username=" + username + "&ename=" + eventname + "&location=" + eventlocation + "&eventprivacy=" + eventprivacy + "&other=" + other;
+
+        String url = baseUrlBuilder(GET_EVENTS,
+                "username", username,
+                "eventname", eventname,
+                "eventlocation", eventlocation,
+                "eventprivacy", eventprivacy,
+                "other", other);
         Log.e("url: ", url);
         return dbRetrieve(url);
-
-
     }
 
-    //function 3
-    public JSONArray createUser(String ... params){
-        String username;
-        String password;
-        String firstname;
-        String lastname;
-        String d_ID;
 
+    public JSONArray createUser(String ... params){
         if(params.length >= 6) {
             username =  params[1];
             password = params[2];
             firstname = params[3];
             lastname = params[4];
-            d_ID = params[5];
+            department = params[5];
         }else{
             return null;
         }
-        String url = "http://65.35.235.139:81/createUser.php?username=" + username + "&password=" + password + "&lastname=" + lastname + "&firstname=" + firstname + "&d_ID=" + d_ID;
-
+        String url = baseUrlBuilder(CREATE_USER,
+                                    "username", username,
+                                    "password", password,
+                                    "firstname", firstname,
+                                    "lastname", lastname,
+                                    "department", department);
         return dbRetrieve(url);
     }
 
-    //A.O just added
-    //function 4
+
     public JSONArray deleteEvent(String ... params) {
 
-        String username="";
-        String eventname="";
-        String eventlocation="";
-        String eventprivacy="";
-        String other="";
-
-
         if(params.length >= 6) {
-            try{
             username = params[1];
-            eventname = URLEncoder.encode(params[2], "utf-8");
-            eventlocation = URLEncoder.encode(params[3], "utf-8");
+            eventname = params[2];
+            eventlocation = params[3];
             eventprivacy = params[4];
             other = params[5];
-            }catch ( UnsupportedEncodingException e){
-                e.printStackTrace();
-            }
-
         }else{
             return null;
         }
-        String url = "http://65.35.235.139:81/deleteEvent.php?username=" + username + "&ename=" + eventname + "&location=" + eventlocation + "&eventprivacy=" + eventprivacy + "&other=" + other;
+        String url = baseUrlBuilder(DELETE_EVENT,
+                                    "username", username,
+                                    "eventname", eventname,
+                                    "eventlocation", eventlocation,
+                                    "eventprivacy", eventprivacy,
+                                    "other", other);
         Log.e("url", url);
         return dbRetrieve(url);
     }
 
-    //function 5
-    public JSONArray createEvent(String ... params){
-        String username="";
-        String eventname="";
-        String eventdes="";
-        String eventlocation="";
-        String eventprivacy="";
-        String date="";
-        String time="";
 
+    public JSONArray createEvent(String ... params){
 
         if(params.length >= 8) {
-            try{
-                username = params[1];
-                eventname = URLEncoder.encode(params[2], "utf-8");
-                eventdes = URLEncoder.encode(params[3], "utf-8");
-                eventlocation = URLEncoder.encode(params[4], "utf-8");
-                eventprivacy = params[5];
-                date = params[6];
-                time = params[7];
-            }catch ( UnsupportedEncodingException e){
-                e.printStackTrace();
-            }
-
+            username = params[1];
+            eventname = params[2];
+            eventdes = params[3];
+            eventlocation = params[4];
+            eventprivacy = params[5];
+            date = params[6];
+            time = params[7];
         }else{
             return null;
         }
-        String url = "http://65.35.235.139:81/createEvent.php?username=" + username + "&ename=" + eventname + "&eventdes=" + eventdes + "&location=" + eventlocation +
-                "&eventprivacy=" + eventprivacy + "&date=" + date + "&time=" + time;
+        String url = baseUrlBuilder(CREATE_EVENT,
+                                    "username", username,
+                                    "eventname", eventname,
+                                    "eventdes", eventdes,
+                                    "eventlocation", eventlocation,
+                                    "eventprivacy", eventprivacy,
+                                    "date", date,
+                                    "time", time);
         Log.e("url", url);
         return dbRetrieve(url);
     }
 
-    //function 6
+
     public JSONArray auth(String ... params){
 
-        String username="";
-        String password="";
-        if(params.length >= 2)
-        {
+        if(params.length >= 2) {
             username = params[1];
             password = params[2];
-
         }else{
             return null;
         }
-        //URL to execute on server
-        String url = "http://65.35.235.139:81/auth.php?username=" + username + "&password=" + password;
+        String url = baseUrlBuilder(AUTHENTICATE,
+                                    "username", username,
+                                    "password", password);
         Log.e("url", url);
         return dbRetrieve(url);
     }
 
-    //function 7
+
     public JSONArray getDepartment(String ... params){
 
-        String username="";
-        String dep_id="";
-        if(params.length >= 2)
-        {
+        if(params.length >= 2) {
             username = params[1];
-            dep_id = params[2];
+            department = params[2];
 
         }else{
             return null;
         }
-        //URL to execute on server
-        String url = "http://65.35.235.139:81/getUser.php?username=" + username + "&department=" + dep_id;
+        String url = baseUrlBuilder(GET_DEPARTMENT,
+                                    "username", username,
+                                    "department", department);
         Log.e("url", url);
         return dbRetrieve(url);
-    }
-
-    public JSONArray selector (String... instruction){
-
-        //Log.e("Instruction[0]: ", instruction[0]);
-        //Log.e("Instruction[1]: ", instruction[1]);
-        switch(instruction[0]){
-            case "0":
-                //Log.e("In case 0", "calls getAllUsers()");
-                return getAllUsers();
-            case "1":
-                //Log.e("In case 1", "calls getUsers " + instruction[1]);
-                return getUsers(instruction[1]); //calls getUser and passes in the name as a string
-            case"2":
-                //Log.e("case 2, getEvents", "size of parameter: " + instruction.length);
-                return getEvents(instruction);
-            case"3":
-                //Log.e("case 3, sign up user: ", "size of parameter: " + instruction.length);
-                return createUser(instruction);
-            case"4":
-                return deleteEvent(instruction);
-            case"5":
-                return createEvent(instruction);
-            case"6":
-                return auth(instruction);
-            case"7":
-                return getDepartment(instruction);
-            default:
-                Log.e("Default case", "Shouldn't be here");
-                return null;
-
-        }
     }
 }

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Plandroid</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="ip_address">104.137.121.245</string>
     <string name="action_settings">Settings</string>
 
     <string name="firstnameIn">Firstname</string>
@@ -30,11 +30,10 @@
         <item>Open</item>
     </string-array>
     <string-array name="department_array">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>Engineering</item>
+        <item>Health</item>
+        <item>Music</item>
     </string-array>
-
     <string name="SendQuery">Send Test Query</string>
     <string name="getAllUsers">Get All Registered Users</string>
 
@@ -44,9 +43,10 @@
     <string name="title_activity_sign_up_">Sign Up</string>
     <string name="title_activity_options_">Options</string>
     <string name="title_activity_test_query">TestQuery</string>
-    <string name="dID">Department ID</string>
+    <string name="deparment">Department</string>
     <string name="conditional_search">Conditional Search</string>
     <string name="criteria">Search Criteria</string>
     <string name="other_user">Other User</string>
     <string name="title_activity_department">Department</string>
+    <string name="initial_results">Results List</string>
 </resources>

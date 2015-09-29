@@ -38,21 +38,20 @@
                 android:paddingTop="10dp"
                 android:text="@string/criteria"/>
 
-            <EditText
-                android:id="@+id/in_departmentId"
+            <Spinner
+                android:id="@+id/department_spinner2"
+                android:layout_gravity="right"
                 android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:background="@color/white"
-                android:hint="@string/dID"
-                android:layout_marginBottom="5dp"/>
-
+                android:id = "@+id/depTV"
+                android:text="@string/initial_results"/>
 
 
         </LinearLayout>
-        <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id= "@+id/dep"/>
+
     </LinearLayout>
 
 

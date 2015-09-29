@@ -102,7 +102,6 @@ public class SearchEventActivity extends ActionBarActivity implements View.OnCli
 
     public class GetEvents extends AsyncTask<String, Long, JSONArray>{
 
-
         dbConnect handle = new dbConnect();
         @Override
         protected JSONArray doInBackground(String... params){

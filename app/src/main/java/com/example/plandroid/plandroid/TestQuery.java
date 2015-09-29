@@ -60,7 +60,7 @@ public class TestQuery extends ActionBarActivity implements View.OnClickListener
         //Intent myIntent;
         switch (v.getId()) {
             case R.id.runQ:
-                new GetUsers().execute("0"); //this will call get all users
+                new GetUsers().execute("GET_ALL_USERS"); //this will call get all users
                 break;
 
         }

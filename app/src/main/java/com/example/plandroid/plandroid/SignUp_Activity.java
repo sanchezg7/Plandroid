@@ -3,20 +3,17 @@ package com.example.plandroid.plandroid;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.EditText;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.content.Intent;
+import android.widget.Spinner;
 import android.widget.Toast;
-import android.os.Bundle;
 
 import org.json.JSONArray;
 
@@ -25,35 +22,29 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
     String username;
     User newUser = new User(); //this is a new user that will input his or her info
     boolean success = false; //check to see if query is successful
-    Intent myIntent;
+    public String departmentSelection;
     Bundle bundle = new Bundle();
+    Spinner mSpinner;
     //Spinner spinner; //to select the d_ID number
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_);
-
-
+        setContentView(R.layout.activity_sign_up);
         //Button References
         Button sign_up = (Button) this.findViewById(R.id.signUpB);
-
-        //A.O. not sure about the line of code below
-        //username = usernameTextView.toString(); //this will be added to the database using JDBC
         sign_up.setOnClickListener(this);
-        /*
-        Spinner spinner = (Spinner) findViewById(R.id.department_spinner);
+
+        mSpinner = (Spinner) findViewById(R.id.department_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.department_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-        */
-
+        mSpinner.setAdapter(adapter);
+        mSpinner.setOnItemSelectedListener(this);
 
     }
 
@@ -67,21 +58,23 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
             EditText lastname_ET = (EditText) findViewById(R.id.in_lastname);
             EditText username_ET = (EditText) findViewById(R.id.in_username);
             EditText password_ET = (EditText) findViewById(R.id.in_password);
-            EditText dept_ET = (EditText) findViewById(R.id.in_department);
+            //add functionality for spinner
+            //EditText dept_ET = (EditText) findViewById(R.id.in_department);
 
             //calling set functions on the new user object
             newUser.setFirstname(firstname_ET.getText().toString());
             newUser.setLastname(lastname_ET.getText().toString());
             newUser.setUsername(username_ET.getText().toString());
             newUser.setPassword(password_ET.getText().toString());
-            newUser.setDepartment(dept_ET.getText().toString());
+            //add functionality for spinner
+            //newUser.setDepartment(dept_ET.getText().toString());
 
             //String d_ID = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
             //int position = spinner.getSelectedItemPosition();
             //Log.e("spinner position: ", String.valueOf(position));
 
             //AsyncTask to sign up the user
-            new SignUpUser().execute("3", newUser.getUsername(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), newUser.getDeparment());
+            new SignUserUp().execute("3", newUser.getUsername(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), newUser.getDeparment());
 
         }
     }
@@ -91,7 +84,7 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
         bundle.putString("USERNAME", newUser.getUsername());
         if(success) { //true
             //Log.e("success: " , Boolean.toString(success));
-            myIntent = new Intent(SignUp_Activity.this, Options_Activity.class);
+            Intent myIntent = new Intent(SignUp_Activity.this, Options_Activity.class);
             myIntent.putExtras(bundle);
             startActivityForResult(myIntent, 0);
         }else if(!success){
@@ -103,14 +96,12 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using
-
+        departmentSelection = mSpinner.getSelectedItem().toString();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,7 +125,7 @@ public class SignUp_Activity extends ActionBarActivity implements OnClickListene
         return super.onOptionsItemSelected(item);
     }
 
-    public class SignUpUser extends AsyncTask<String, Long, JSONArray>{
+    public class SignUserUp extends AsyncTask<String, Long, JSONArray>{
 
         JSONArray temp = null;
         dbConnect handle = new dbConnect();

@@ -53,7 +53,6 @@ public class CreateEventActivity extends ActionBarActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
-
         // Obtain values passed through Intents
         Bundle b = getIntent().getExtras();
         createEvent_username = b.getString("CREATE_EVENT_USERNAME");
@@ -87,12 +86,7 @@ public class CreateEventActivity extends ActionBarActivity implements View.OnCli
         */
 
        buttonCE.setOnClickListener(this);
-
-
-
-
     }
-
 
     public void onClick(View v) {
         //Toast.makeText(getBaseContext(), "Date selected:" + (datePicker.getMonth() + 1) + "/" + datePicker.getDayOfMonth() + "/" + datePicker.getYear() + "\n"
@@ -115,16 +109,15 @@ public class CreateEventActivity extends ActionBarActivity implements View.OnCli
 
             createEvent_ename = null;
             createEvent_ename = cre_eventNameField.getText().toString();
-            new NewEvent().execute("5", createEvent_username, createEvent_ename, cre_description.getText().toString(), cre_eLocation.getText().toString(), cre_ePrivacy.getText().toString(), date, time);
+            new NewEvent().execute("5", createEvent_username, createEvent_ename, cre_description.getText().toString(),
+                    cre_eLocation.getText().toString(), cre_ePrivacy.getText().toString(), date, time);
             break;
-
         }
 
 
     }
 
     private void onSuccess(boolean success){
-
         if(success){
             //Log.e("success: " , Boolean.toString(success));
             myIntent = new Intent(CreateEventActivity.this, Options_Activity.class);
@@ -135,10 +128,7 @@ public class CreateEventActivity extends ActionBarActivity implements View.OnCli
             return;
         }
     }
-
-
     public class NewEvent extends AsyncTask<String, Long, JSONArray>{
-
         JSONArray temp = null;
         dbConnect handle = new dbConnect();
 
@@ -147,7 +137,6 @@ public class CreateEventActivity extends ActionBarActivity implements View.OnCli
             temp = handle.selector(params);
             return temp;
         }
-
         protected void onPostExecute(JSONArray jsonArray){
             if(temp != null) {
                 Toast.makeText(CreateEventActivity.this, "Event Created", Toast.LENGTH_SHORT).show();
@@ -158,18 +147,12 @@ public class CreateEventActivity extends ActionBarActivity implements View.OnCli
             }
         }
     }
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_create_event, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

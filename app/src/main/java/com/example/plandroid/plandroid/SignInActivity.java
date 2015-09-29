@@ -132,11 +132,6 @@ public class SignInActivity extends ActionBarActivity implements OnClickListener
         }
 
     }
-
-
-
-
-
     public class authenticate extends AsyncTask<String, Long, JSONArray>{
 
         JSONArray temp = null;
